@@ -10,10 +10,13 @@
     "apollo-datasource": "^0.2.1",
     "apollo-datasource-rest": "^0.2.1",
     "apollo-server-express": "^2.2.5",
+    "body-parser": "^1.18.3",
     "express": "^4.16.4",
     "graphql": "^14.0.2",
+    "isemail": "^3.2.0",
     "mysql2": "^1.6.4",
     "nodemon": "^1.18.7",
-    "sequelize": "^4.41.2"
+    "sequelize": "^4.41.2",
+    "signale": "^1.3.0"
   }
 }

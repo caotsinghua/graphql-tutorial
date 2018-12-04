@@ -9,13 +9,15 @@ class LaunchApi extends RESTDataSource {
     return res && res.length ? res.map(item => this.launchReducer(item)) : [];
   }
   async getLaunchById({ launchId }) {
+    sigConsole.debug(`get launch id:${launchId}`);
     const res = await this.get("launches", { flight_number: launchId });
-    return this.launchReducer(res[0]);
+    return res ? this.launchReducer(res[0]) : null;
   }
   async getLaunchesByIds({ launchIds }) {
+    sigConsole.debug(`getLaunches ${launchIds}`);
     return await Promise.all(
-      launchIds.map(launchId => this.getLaunchById(launchId))
-    );
+      launchIds.map(launchId => this.getLaunchById({ launchId }))
+    ).then(res => res.filter(item => !!item));
   }
   launchReducer(launch) {
     return {
@@ -31,8 +33,7 @@ class LaunchApi extends RESTDataSource {
         id: launch.rocket.rocket_id,
         name: launch.rocket.rocket_name,
         type: launch.rocket.rocket_type
-      },
-      isBooked: launch.launch_success
+      }
     };
   }
 }

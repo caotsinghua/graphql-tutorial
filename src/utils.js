@@ -23,7 +23,7 @@ const createStore = () => {
       autoIncrement: true
     },
     createdAt: SQL.DATE,
-    updateAt: SQL.DATE,
+    updatedAt: SQL.DATE,
     email: SQL.STRING,
     token: SQL.STRING
   });
@@ -34,10 +34,11 @@ const createStore = () => {
       autoIncrement: true
     },
     createdAt: SQL.DATE,
-    updateAt: SQL.DATE,
+    updatedAt: SQL.DATE,
     launchId: SQL.INTEGER,
     userId: SQL.INTEGER
   });
+  db.sync();
   return {
     users,
     trips

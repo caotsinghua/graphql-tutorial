@@ -33,7 +33,7 @@ exports.typeDefs = gql`
   }
   type Mutation {
     bookTrips(launchIds: [ID]!): TripUpdateResponse!
-    cancleTrip(launchId: ID!): TripUpdateResponse!
+    cancelTrip(launchId: ID!): TripUpdateResponse!
     login(email: String): String
   }
   type TripUpdateResponse {
