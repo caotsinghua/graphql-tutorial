@@ -1,7 +1,22 @@
+const { paginateResults } = require("./utils");
 module.exports = {
   Query: {
-    launches: async (parent, args, context, info) => {
-      return context.dataSources.launchApi.getAllLaunches();
+    launches: async (parent, { pageSize = 20, after }, context, info) => {
+      const allLaunches = await context.dataSources.launchApi.getAllLaunches();
+      allLaunches.reverse();
+      const launches = paginateResults({
+        after,
+        pageSize,
+        results: allLaunches
+      });
+      return {
+        launches,
+        cursor: launches.length ? launches[launches.length - 1].cursor : null,
+        hasMore: launches.length
+          ? launches[launches.length - 1].cursor !==
+            allLaunches[allLaunches.length - 1].cursor
+          : false
+      };
     },
     launch: async (parent, args, { dataSources }) => {
       return dataSources.launchApi.getLaunchById({

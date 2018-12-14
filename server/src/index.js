@@ -42,7 +42,7 @@ app.use(bodyparser.json());
 app.use(bodyparser.urlencoded());
 server.applyMiddleware({
   app,
-  path: "/gpl"
+  path: "/"
 });
 app.listen(3001, () => {
   sigConsole.start(`[app] run at http://localhost:3001${server.graphqlPath}`);
